@@ -1,7 +1,2 @@
-from flask import Blueprint
-
-# Vytvoříme instanci Blueprintu s názvem 'main'
-bp = Blueprint('main', __name__)
-
-# Na konci naimportujeme naše routy, abychom předešli cyklickým závislostem
-from app.main import routes
+# app/main/__init__.py
+from .routes import bp

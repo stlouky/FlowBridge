@@ -1,6 +1,6 @@
 Project FlowBridge: Project Tracker
 
-Poslední aktualizace: 22. 6. 2025, 21:04
+Poslední aktualizace: 22. 6. 2025, 22:21 (CEST)
 
 Tento dokument slouží jako centrální bod pro sledování postupu, technologií a klíčových rozhodnutí v rámci projektu FlowBridge. Jeho účelem je umožnit komukoliv (včetně AI asistenta v novém chatu) rychle pochopit stav projektu a plynule navázat na předchozí práci.
 1. Vize Projektu (The "Why")
@@ -32,22 +32,23 @@ Cílem je vytvořit dvoufázový učební systém pro anglickou konverzaci:
     [22.6.2025] Definována vize a dvoufázový model učení.
     [22.6.2025] Zvolen název projektu: FlowBridge.
     [22.6.2025] Definována a odsouhlasena sada technologií (Tech Stack).
-    [22.6.2025] Vyřešeny obavy ohledně nákladů na TTS služby (potvrzeno, že pro osobní projekt bude zdarma).
-    [22.6.2025] Dohodnut pracovní postup přes GitHub a vytvořen tento PROJECT_TRACKER.md soubor.
+    [22.6.2025] Vyřešeny obavy ohledně nákladů na TTS služby.
+    [22.6.2025] Dohodnut pracovní postup přes GitHub a vytvořen PROJECT_TRACKER.md.
     [22.6.2025] Založen a naklonován GitHub repozitář.
-    [22.6.2025] Vytvořena profesionální adresářová struktura pomocí setup_project.sh a vyčištěny nepotřebné soubory.
-    [22.6.2025] Základní 'Hello World' aplikace zprovozněna v nové, škálovatelné struktuře (App Factory, Blueprints).
-    [22.6.2025] Implementována a zobrazena první dynamická fráze z CSV souboru.
+    [22.6.2025] Vytvořena profesionální adresářová struktura a zprovozněna v nové podobě (App Factory, Blueprints).
+    [22.6.2025] Implementována interaktivní smyčka s "chytrou" zpětnou vazbou (diff).
+    [22.6.2025] Implementována audio-first funkcionalita. Aplikace nyní automaticky přehrává zvuk otázky. Zvukové soubory se generují on-demand (gTTS) a ukládají do mezipaměti (cache).
 
 5. Aktuální Stav a Další Krok (Current Status & Next Step)
 
-    Aktuální stav: Aplikace načítá data z CSV a dynamicky zobrazuje otázku a (zatím nemaskovanou) odpověď.
-    Další okamžitý krok: Oživit vstupní pole a tlačítko "Ověřit" pomocí JavaScriptu. Umožnit odeslání uživatelovy odpovědi na server ke kontrole.
+    Aktuální stav: Aplikace má plně funkční učební cyklus: dynamické načítání frází, chytré 'diff' porovnání odpovědi a audio přehrávání otázek. Základní aktualizace Indexu Naučení (bez časového faktoru) funguje a ukládá se do CSV.
+    Další okamžitý krok: Implementovat započítávání času odpovědi do výpočtu Indexu Naučení pro ještě přesnější a efektivnější učení.
 
 6. Klíčová Rozhodnutí (Key Decisions Log)
 
-    Desktop-first: Aplikace (Fáze 1) poběží jako webová aplikace primárně na desktopu, aby se předešlo komplikacím s mobilním vývojem. Hlasový vstup od uživatele byl pro Fázi 1 odložen.
-    Ukládání zvuku (Caching): Bylo rozhodnuto, že všechny generované zvuky budou ukládány lokálně, aby se minimalizovaly náklady a zrychlila aplikace.
-    Čeština jako nápověda: V datovém modelu anglicko-anglických frází bude existovat volitelná česká nápověda, aby se předešlo frustraci.
-    [22.6.2025] Profesionální struktura: Projekt byl restrukturalizován pro lepší škálovatelnost. Byla implementována struktura s "Application Factory" a "Blueprints". Hlavní spouštěcí soubor je run.py.
-    [22.6.2025] Virtuální prostředí: Veškeré závislosti projektu jsou spravovány ve virtuálním prostředí myenv.
+    Desktop-first: Aplikace (Fáze 1) poběží jako webová aplikace primárně na desktopu.
+    Ukládání zvuku (Caching): Všechny generované zvuky se ukládají lokálně.
+    Čeština jako nápověda: V datovém modelu bude existovat volitelná česká nápověda.
+    Profesionální struktura: Projekt využívá strukturu s "Application Factory" a "Blueprints".
+    Virtuální prostředí: Veškeré závislosti jsou spravovány v myenv.
+    Vylepšená zpětná vazba: Rušivé alert() okno nahrazeno integrovanou zprávou s vizuálním porovnáním ("diff").

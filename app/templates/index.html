@@ -9,27 +9,143 @@
     <header>
         <h1>FlowBridge</h1>
     </header>
-    <main>
+    
+    <main id="main-container" data-phrase-id="{{ phrase.ID_páru if phrase else '' }}">
         <h2>Tréninková fráze:</h2>
         
         {% if phrase %}
-            <p id="question-phrase">
+            <p id="question-phrase" style="font-weight: bold; font-size: 1.8em;">
                 {{ phrase.Otázka_EN }}
             </p>
             
             <h3>Tvoje odpověď:</h3>
-	    <p id="answer-prompt" style="font-family: monospace; font-size: 1.3em;">
-   	       {{ masked_answer }}
-           </p>
+            <p id="answer-prompt" style="font-family: monospace; font-size: 1.3em;">
+                {{ masked_answer }}
+            </p>
         {% else %}
-            <p style="color: red;">Nebyly nalezeny žádné fráze v souboru fraze.csv!</p>
+            <p style="color: red;">Gratuluji! Všechny fráze jsou naučené. Přidej nové do fraze.csv a restartuj server.</p>
         {% endif %}
 
         <input type="text" id="user-answer" placeholder="Napiš svou odpověď sem...">
         <button id="submit-button">Ověřit</button>
+        
+        <div id="feedback" class="feedback-message"></div>
     </main>
+    
     <footer>
-        <p>&copy; 2025 - Tvůj projekt FlowBridge</p>
+        <p style="text-align: center; color: #888; font-size: 0.9em;">&copy; 2025 - Tvůj projekt FlowBridge</p>
     </footer>
+
+    <script>
+        // Spustíme kód, až když je celá HTML stránka načtená a připravená
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Najdeme si všechny HTML elementy, se kterými budeme pracovat
+            const submitButton = document.getElementById('submit-button');
+            const userAnswerInput = document.getElementById('user-answer');
+            const mainContainer = document.getElementById('main-container');
+            const feedbackDiv = document.getElementById('feedback');
+            const questionPhraseEl = document.getElementById('question-phrase');
+            const answerPromptEl = document.getElementById('answer-prompt');
+
+            // Proměnná pro uložení časovače, abychom mohli staré zprávy skrýt
+            let feedbackTimeout; 
+
+            /**
+             * Funkce pro načtení a zobrazení nové fráze na stránce
+             * @param {Object} phrase - Objekt s daty nové fráze
+             * @param {string} maskedAnswer - Maskovaná odpověď pro novou frázi
+             */
+            function loadNextPhrase(phrase, maskedAnswer) {
+		    if (phrase) {
+			questionPhraseEl.textContent = phrase.Otázka_EN;
+			answerPromptEl.textContent = maskedAnswer;
+			mainContainer.dataset.phraseId = phrase.ID_páru;
+			userAnswerInput.value = '';
+			feedbackDiv.classList.remove('visible');
+			userAnswerInput.focus();
+
+			// --- NOVÁ ČÁST PRO PŘEHRÁNÍ ZVUKU ---
+			// Sestavíme URL k našemu audio souboru
+			const audioUrl = `/audio/${phrase.ID_páru}.mp3`;
+			// Vytvoříme nový objekt pro přehrávání zvuku
+			const audio = new Audio(audioUrl);
+			// Spustíme přehrávání
+			audio.play();
+			// ------------------------------------
+
+		    } else {
+			mainContainer.innerHTML = '<h2>Gratuluji! Všechny fráze jsou naučené!</h2><p>Můžeš přidat nové fráze do souboru `fraze.csv` a obnovit stránku.</p>';
+		    }
+	   }
+
+            /**
+             * Funkce pro zobrazení chytré zpětné vazby a naplánování načtení další fráze.
+             * @param {boolean} isPerfect - Je odpověď 100% správná?
+             * @param {Array} diff - Pole objektů s výsledkem porovnání.
+             * @param {Object} nextPhrase - Data pro další frázi
+             * @param {string} nextMaskedAnswer - Maskovaná odpověď pro další frázi
+             */
+            function showFeedback(isPerfect, diff, nextPhrase, nextMaskedAnswer) {
+                clearTimeout(feedbackTimeout);
+                feedbackDiv.innerHTML = ''; // Nejprve vyčistíme předchozí obsah
+                
+                diff.forEach(part => {
+                    const span = document.createElement('span');
+                    span.textContent = part.text;
+                    if (part.tag === 'correct') { span.className = 'diff-correct'; } 
+                    else if (part.tag === 'incorrect') { span.className = 'diff-incorrect'; } 
+                    else if (part.tag === 'missing') { span.className = 'diff-missing'; }
+                    feedbackDiv.appendChild(span);
+                });
+
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.classList.add(isPerfect ? 'correct' : 'incorrect');
+                feedbackDiv.classList.add('visible');
+
+                // Po 2 sekundách načteme další frázi
+                setTimeout(() => {
+                    loadNextPhrase(nextPhrase, nextMaskedAnswer);
+                }, 2000);
+            }
+
+            /**
+             * Asynchronní funkce, která se spustí po odeslání odpovědi.
+             */
+            async function checkAnswer() {
+                const userAnswer = userAnswerInput.value;
+                const phraseId = mainContainer.dataset.phraseId;
+                
+                if (!phraseId) return; // Nedělej nic, pokud není žádná fráze načtená
+
+                // Odešleme data na náš Flask API endpoint
+                const response = await fetch('/check_answer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_answer: userAnswer, phrase_id: phraseId })
+                });
+
+                const result = await response.json();
+                
+                // Zavoláme funkci pro zobrazení zpětné vazby a předáme jí VŠECHNA data ze serveru
+                showFeedback(
+                    result.feedback.is_perfectly_correct, 
+                    result.feedback.diff,
+                    result.next_phrase,
+                    result.next_masked_answer
+                );
+            }
+
+            // Přidáme "posluchače" na kliknutí na tlačítko "Ověřit"
+            submitButton.addEventListener('click', checkAnswer);
+
+            // Bonus: Možnost odeslat odpověď stisknutím klávesy Enter
+            userAnswerInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    checkAnswer();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
