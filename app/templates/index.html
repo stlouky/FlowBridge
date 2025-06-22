@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>FlowBridge Trainer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>FlowBridge</h1>
+    </header>
+    <main>
+        <h2>Tréninková fráze:</h2>
+        
+        {% if phrase %}
+            <p id="question-phrase">
+                {{ phrase.Otázka_EN }}
+            </p>
+            
+            <h3>Tvoje odpověď:</h3>
+	    <p id="answer-prompt" style="font-family: monospace; font-size: 1.3em;">
+   	       {{ masked_answer }}
+           </p>
+        {% else %}
+            <p style="color: red;">Nebyly nalezeny žádné fráze v souboru fraze.csv!</p>
+        {% endif %}
+
+        <input type="text" id="user-answer" placeholder="Napiš svou odpověď sem...">
+        <button id="submit-button">Ověřit</button>
+    </main>
+    <footer>
+        <p>&copy; 2025 - Tvůj projekt FlowBridge</p>
+    </footer>
+</body>
+</html>

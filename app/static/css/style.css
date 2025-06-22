@@ -1,0 +1,117 @@
+/*
+ * Dark Pastel Theme pro FlowBridge
+ */
+
+/* Definice barevné palety pomocí CSS proměnných pro snadné úpravy */
+:root {
+    --bg-color: #1e1e2f;          /* Tmavě modro-fialové pozadí */
+    --container-bg: #27293d;    /* Mírně světlejší pozadí pro hlavní kontejner */
+    --text-color: #e0e0e0;         /* Jemná bílá pro text */
+    --primary-text: #ffffff;       /* Čistá bílá pro hlavní nadpisy */
+    --accent-color: #a688fa;       /* Pastelová fialová jako hlavní akcent */
+    --accent-hover: #c0a6ff;     /* Světlejší fialová pro interakci (hover) */
+    --border-color: rgba(255, 255, 255, 0.1); /* Jemný okraj */
+}
+
+/* Základní styly pro celou stránku */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+}
+
+/* Stylování hlavičky */
+header h1 {
+    color: var(--primary-text);
+    text-align: center;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+
+/* Hlavní kontejner aplikace */
+main {
+    background-color: var(--container-bg);
+    border: 1px solid var(--border-color);
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Styly pro texty a nadpisy uvnitř kontejneru */
+main h2 {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+main h3 {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+#question-phrase {
+    font-weight: bold;
+    font-size: 1.8em;
+    color: var(--primary-text);
+    margin: 20px 0;
+}
+
+#answer-prompt {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.3em;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    padding: 10px;
+    border-radius: 5px;
+    letter-spacing: 2px;
+}
+
+/* Styly pro formulářové prvky */
+input[type="text"] {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1.2em;
+    padding: 10px;
+    width: calc(100% - 22px); /* Šířka na 100% mínus padding a border */
+    margin-top: 10px;
+    transition: border-color 0.3s;
+}
+
+/* Zvýraznění inputu při kliknutí */
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+button {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Patička stránky */
+footer {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.5;
+    font-size: 0.9em;
+    margin-top: 40px;
+}

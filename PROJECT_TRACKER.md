@@ -37,11 +37,12 @@ Cílem je vytvořit dvoufázový učební systém pro anglickou konverzaci:
     [22.6.2025] Založen a naklonován GitHub repozitář.
     [22.6.2025] Vytvořena profesionální adresářová struktura pomocí setup_project.sh a vyčištěny nepotřebné soubory.
     [22.6.2025] Základní 'Hello World' aplikace zprovozněna v nové, škálovatelné struktuře (App Factory, Blueprints).
+    [22.6.2025] Implementována a zobrazena první dynamická fráze z CSV souboru.
 
 5. Aktuální Stav a Další Krok (Current Status & Next Step)
 
-    Aktuální stav: Aplikace úspěšně běží v nové, profesionální struktuře. Zobrazuje statickou HTML stránku z app/templates/index.html. V kořenovém adresáři jsou připravena testovací data v fraze.csv.
-    Další okamžitý krok: Implementovat v app/services.py funkci pro načtení dat z fraze.csv. Tuto funkci zavolat v app/main/routes.py a předat data do šablony index.html, aby se dynamicky zobrazila první fráze.
+    Aktuální stav: Aplikace načítá data z CSV a dynamicky zobrazuje otázku a (zatím nemaskovanou) odpověď.
+    Další okamžitý krok: Oživit vstupní pole a tlačítko "Ověřit" pomocí JavaScriptu. Umožnit odeslání uživatelovy odpovědi na server ke kontrole.
 
 6. Klíčová Rozhodnutí (Key Decisions Log)
 
