@@ -3,6 +3,8 @@ import os
 import random
 import difflib
 from gtts import gTTS
+import pandas as pd
+from difflib import SequenceMatcher 
 from flask import current_app
 
 def load_phrases():
@@ -46,26 +48,32 @@ def save_phrases(phrases):
         print(f"CHYBA při zápisu do souboru {file_path}: {e}")
         
 # --- NOVÁ FUNKCE ---
-def generate_audio_file_if_not_exists(phrase_id, text):
+def generate_audio_file_if_not_exists(filename, text_to_speak, audio_dir='audio'):
     """
-    Zkontroluje, jestli existuje audio soubor. Pokud ne, vygeneruje ho pomocí gTTS.
+    Univerzální funkce, která vygeneruje audio soubor, pokud neexistuje.
+    Nyní pracuje s celým názvem souboru.
     """
-    # Sestavíme cestu k audio souboru ve složce 'audio'
-    # app.root_path je cesta ke složce 'app', takže musíme o úroveň výš
-    audio_folder = os.path.join(current_app.root_path, '..', 'audio')
-    audio_path = os.path.join(audio_folder, f"{phrase_id}.mp3")
-
-    # Pokud soubor ještě neexistuje, vytvoříme ho
-    if not os.path.exists(audio_path):
-        try:
-            print(f"Generuji audio pro frázi ID: {phrase_id}...")
-            tts = gTTS(text=text, lang='en', slow=False)
-            tts.save(audio_path)
-            print(f"Audio uloženo: {audio_path}")
-        except Exception as e:
-            print(f"CHYBA při generování gTTS zvuku: {e}")
+    # Ujistíme se, že název souboru končí na .mp3
+    if not filename.endswith('.mp3'):
+        filename += '.mp3'
+        
+    audio_path = os.path.join(audio_dir, filename)
     
-    return audio_path
+    # Pokud soubor již existuje, nic neděláme
+    if os.path.exists(audio_path):
+        return True, "File already exists."
+        
+    try:
+        # Vytvoříme adresář, pokud neexistuje
+        os.makedirs(audio_dir, exist_ok=True)
+        
+        # Vygenerujeme audio
+        tts = gTTS(text=text_to_speak, lang='en')
+        tts.save(audio_path)
+        return True, f"File {filename} created successfully."
+    except Exception as e:
+        print(f"Error generating audio file {filename}: {e}")
+        return False, str(e)
 
 # --- NOVÁ FUNKCE ---
 def get_next_phrase(phrases):
@@ -108,26 +116,29 @@ def mask_word(text, learning_index):
         letter_idx += 1
     return "".join(masked_list)
 
-def compare_answers(user_answer, correct_answer):
-    # ... beze změny ...
-    user_words = user_answer.split()
-    correct_words = correct_answer.split()
-    matcher = difflib.SequenceMatcher(None, user_words, correct_words)
-    diff_result = []
+def compare_answers(user_input, correct_answer):
+    """
+    Porovná dva texty a vrátí výsledek jako JEDEN HTML řetězec.
+    Toto je opravená verze, která řeší problém '[object Object]'.
+    """
+    # Použijeme SequenceMatcher pro nalezení rozdílů
+    matcher = SequenceMatcher(None, user_input.lower(), correct_answer.lower())
+    
+    html_parts = []
     for tag, i1, i2, j1, j2 in matcher.get_opcodes():
         if tag == 'equal':
-            diff_result.append({'tag': 'correct', 'text': ' '.join(user_words[i1:i2])})
+            # Správná část, kterou uživatel napsal
+            html_parts.append(f"<span class='diff-correct'>{correct_answer[j1:j2]}</span>")
         elif tag == 'replace':
-            diff_result.append({'tag': 'incorrect', 'text': ' '.join(user_words[i1:i2])})
-            missing_text = ' '.join(correct_words[j1:j2])
-            diff_result.append({'tag': 'missing', 'text': f'[{missing_text}]'})
+            # Uživatel napsal něco jiného, než měl
+            html_parts.append(f"<del class='diff-incorrect'>{user_input[i1:i2]}</del>")
+            html_parts.append(f"<ins class='diff-missing'>{correct_answer[j1:j2]}</ins>")
         elif tag == 'delete':
-            diff_result.append({'tag': 'incorrect', 'text': ' '.join(user_words[i1:i2])})
+            # Uživatel napsal něco navíc
+            html_parts.append(f"<del class='diff-incorrect'>{user_input[i1:i2]}</del>")
         elif tag == 'insert':
-            missing_text = ' '.join(correct_words[j1:j2])
-            diff_result.append({'tag': 'missing', 'text': f'[{missing_text}]'})
-    result_with_spaces = []
-    for item in diff_result:
-        result_with_spaces.append(item)
-        result_with_spaces.append({'tag': 'space', 'text': ' '})
-    return result_with_spaces[:-1]
+            # Uživatel na něco zapomněl
+            html_parts.append(f"<ins class='diff-missing'>{correct_answer[j1:j2]}</ins>")
+            
+    # Spojíme všechny části do jednoho finálního HTML stringu
+    return "".join(html_parts)
