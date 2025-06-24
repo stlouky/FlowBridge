@@ -1,0 +1,26 @@
+ID_páru,Otázka_EN,Odpověď_EN,Nápověda_CZ_Otazka,Nápověda_CZ_Odpoved,Index_Naučení
+1,Hello.,Hi there.," ""Ahoj. / Dobrý den.""",Ahoj.,2.41
+2,Good morning.,Good morning to you too.,Dobré ráno.,I tobě dobré ráno.,4.08
+3,Good afternoon.,Good afternoon.,Dobré odpoledne.,Dobré odpoledne.,2.42
+4,Good evening.,Good evening.,Dobrý večer.,Dobrý večer.,2.30
+5,How are you?,"I'm fine, thank you. And you?",Jak se máš/máte?,"Mám se dobře, děkuji. A ty/vy?",4.08
+6,How is it going?,"It's going well, thanks.",Jak to jde?,"Jde to dobře, díky.",2.40
+7,Please.,Of course.,Prosím.,Samozřejmě.,2.40
+8,Thank you.,You're welcome.,Děkuji.,Rádo se stalo.,2.32
+9,Thanks a lot.,Don't mention it.,Díky moc.,To nestojí za řeč.,2.40
+10,Excuse me.,Yes?,Promiňte.,Ano?,2.40
+11,I'm sorry.,No problem.,Omlouvám se.,Žádný problém.,2.52
+12,I apologize.,That's alright.,Omlouvám se (formálněji).,To je v pořádku.,2.40
+13,Yes.,Great.,Ano.,Skvělé.,3.95
+14,No.,Okay.,Ne.,Dobře.,2.49
+15,Goodbye.,"Bye, take care.",Nashledanou.,"Ahoj, opatruj se.",2.52
+16,See you later.,See you.,Uvidíme se později.,Uvidíme se.,2.43
+17,Have a nice day.,You too.,Měj hezký den.,Ty taky.,2.40
+18,I don't know.,That's a pity.,Nevím.,To je škoda.,2.40
+19,I understand.,Good.,Rozumím.,Dobře.,2.50
+20,I don't understand.,Let me explain it again.,Nerozumím.,Dovolte mi to vysvětlit znovu.,2.40
+21,Can you repeat that?,Of course.,Můžete to zopakovat?,Jistě.,2.40
+22,What is this?,This is a table.,Co je toto?,Toto je stůl.,0.00
+23,What is that?,That is a window.,Co je tamto?,Tamto je okno.,2.48
+24,Is this correct?,"Yes, it is.",Je toto správně?,"Ano, je.",2.45
+25,Is that wrong?,"No, it's perfect.",Je tamto špatně?,"Ne, je to perfektní.",2.40

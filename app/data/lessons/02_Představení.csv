@@ -1,0 +1,21 @@
+ID_páru,Otázka_EN,Odpověď_EN,Nápověda_CZ_Otazka,Nápověda_CZ_Odpoved,Index_Naučení
+26,"What's your name?","My name is Peter.","Jak se jmenuješ?","Jmenuji se Petr.",0.0
+27,"What is your surname?","My surname is Novák.","Jaké je tvé příjmení?","Moje příjmení je Novák.",0.0
+28,"Where are you from?","I'm from the Czech Republic.","Odkud jsi?","Jsem z České republiky.",0.0
+29,"Where do you live?","I live in Prague.","Kde bydlíš?","Bydlím v Praze.",0.0
+30,"How old are you?","I'm thirty years old.","Kolik je ti let?","Je mi třicet let.",0.0
+31,"What do you do?","I'm a developer.","Co děláš (za práci)?","Jsem vývojář.",0.0
+32,"Are you married?","No, I'm single.","Jsi ženatý/vdaná?","Ne, jsem svobodný/á.",0.0
+33,"Do you have any children?","Yes, I have two sons.","Máš nějaké děti?","Ano, mám dva syny.",0.0
+34,"Do you have any siblings?","I have one sister.","Máš nějaké sourozence?","Mám jednu sestru.",0.0
+35,"What are your hobbies?","I like sports and reading.","Jaké jsou tvé koníčky?","Mám rád sport a čtení.",0.0
+36,"What kind of music do you like?","I like rock music.","Jaký druh hudby máš rád?","Mám rád rockovou hudbu.",0.0
+37,"What's your favorite color?","My favorite color is blue.","Jaká je tvá oblíbená barva?","Moje oblíbená barva je modrá.",0.0
+38,"Nice to meet you.","Nice to meet you too.","Rád tě poznávám.","Taky tě rád poznávám.",0.0
+39,"Pleased to meet you.","The pleasure is mine.","Těší mě, že vás poznávám.","Potěšení je na mé straně.",0.0
+40,"This is my friend, Jane.","Hi Jane, nice to meet you.","Tohle je moje kamarádka, Jana.","Ahoj Jano, těší mě.",0.0
+41,"Do you speak English?","Yes, a little.","Mluvíš anglicky?","Ano, trochu.",0.0
+42,"What languages do you speak?","I speak Czech and English.","Jakými jazyky mluvíš?","Mluvím česky a anglicky.",0.0
+43,"Can I have your phone number?","Sure, it's...","Můžu dostat tvé telefonní číslo?","Jistě, je to...",0.0
+44,"What's your email address?","It's example@email.com.","Jaká je tvá e-mailová adresa?","Je to example@email.com.",0.0
+45,"It was nice talking to you.","You too.","Rád jsem si s tebou povídal.","Já s tebou taky.",0.0

@@ -1,0 +1,21 @@
+ID_páru,Otázka_EN,Odpověď_EN,Nápověda_CZ_Otazka,Nápověda_CZ_Odpoved,Index_Naučení
+106,"I've lost my passport.","You should contact your embassy immediately.","Ztratil jsem pas.","Měl byste okamžitě kontaktovat svou ambasádu.",0.0
+107,"My phone doesn't work.","Maybe the battery is dead.","Můj telefon nefunguje.","Možná je vybitá baterie.",0.0
+108,"I need a doctor.","I will call an ambulance for you.","Potřebuji doktora.","Zavolám vám sanitku.",0.0
+109,"I missed my flight.","You need to go to the airline desk.","Zmeškal jsem let.","Musíte jít k přepážce letecké společnosti.",0.0
+110,"I don't feel well.","You should sit down and drink some water.","Není mi dobře.","Měl byste si sednout a napít se vody.",0.0
+111,"Is there a pharmacy nearby?","Yes, there is one on the next street.","Je tu poblíž lékárna?","Ano, jedna je v další ulici.",0.0
+112,"What did you say?","I said we should hurry up.","Co jsi říkal?","Říkal jsem, že bychom si měli pospíšit.",0.0
+113,"Can you write it down for me?","Of course, no problem.","Můžete mi to napsat?","Samozřejmě, žádný problém.",0.0
+114,"I have a headache.","Maybe you should take an aspirin.","Bolí mě hlava.","Možná by sis měl vzít aspirin.",0.0
+115,"I can't find my keys.","Where did you see them last?","Nemůžu najít své klíče.","Kde jsi je viděl naposledy?",0.0
+116,"The Wi-Fi is not working.","Let's try to restart the router.","Nefunguje Wi-Fi.","Zkusme restartovat router.",0.0
+117,"My car has broken down.","I will call a tow truck.","Porouchalo se mi auto.","Zavolám odtahovku.",0.0
+118,"Someone stole my wallet.","You must report it to the police.","Někdo mi ukradl peněženku.","Musíte to nahlásit na policii.",0.0
+119,"The ATM ate my card.","You have to call the bank.","Bankomat mi sežral kartu.","Musíte zavolat do banky.",0.0
+120,"This is not what I ordered.","I'm very sorry, I'll change it.","Tohle jsem si neobjednal.","Moc se omlouvám, vyměním to.",0.0
+121,"The room is too noisy.","I can give you another room.","Pokoj je příliš hlučný.","Mohu vám dát jiný pokoj.",0.0
+122,"There is a mistake in the bill.","Let me check it for you.","V účtu je chyba.","Dovolte mi to zkontrolovat.",0.0
+123,"I'm allergic to nuts.","This dish does not contain nuts.","Jsem alergický na ořechy.","Tento pokrm neobsahuje ořechy.",0.0
+124,"Can you take a picture of me?","Sure, just smile.","Můžete mě vyfotit?","Jistě, jen se usmějte.",0.0
+125,"My luggage is lost.","Please fill out this form.","Ztratilo se mi zavazadlo.","Vyplňte prosím tento formulář.",0.0

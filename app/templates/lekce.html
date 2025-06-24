@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Správa Lekcí - FlowBridge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>FlowBridge - Správa Lekcí</h1>
+        <nav>
+            <a href="{{ url_for('main.index') }}" class="btn-nav {% if not active_lesson %}disabled{% endif %}">
+                Přejít na trénink
+            </a>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Dostupné Lekce</h2>
+        <p>Vyberte lekci, kterou chcete trénovat. Váš výběr si budeme pamatovat.</p>
+        
+        {% if lessons %}
+            <ul class="lesson-list">
+                {% for lesson in lessons %}
+                    <li class="lesson-item {% if lesson == active_lesson %}active{% endif %}">
+                        <span class="lesson-name">{{ lesson.replace('_', ' ') }}</span>
+                        <div class="lesson-actions">
+                            {% if lesson == active_lesson %}
+                                <span class="btn-train active">Právě trénujete</span>
+                            {% else %}
+                                <a href="{{ url_for('main.select_lesson', lesson_name=lesson) }}" class="btn-train">
+                                    Vybrat k tréninku
+                                </a>
+                            {% endif %}
+                            <a href="#" class="btn-manage disabled" title="Bude implementováno">Spravovat fráze</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="error-message">Nebyly nalezeny žádné lekce v adresáři <code>app/data/lessons/</code>.</p>
+        {% endif %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 - Tvůj projekt FlowBridge</p>
+    </footer>
+</body>
+</html>

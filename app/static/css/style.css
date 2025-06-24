@@ -138,3 +138,35 @@ footer {
     border-radius: 3px;
     padding: 0 2px;
 }
+
+/* === STYLY PRO NADPIS OTÁZKY A IKONU NÁPOVĚDY === */
+
+/* Vytvoří flexbox kontejner pro nadpis */
+.question-header {
+    display: flex;
+    justify-content: space-between; /* Klíčová vlastnost: roztáhne prvky od sebe */
+    align-items: center;          /* Svisle je zarovná na střed */
+    margin-bottom: 0.5em;         /* Malá mezera pod nadpisem */
+}
+
+/* Styl pro samotnou ikonu otazníku */
+.help-icon {
+    font-size: 0.8em;          /* Menší velikost písma */
+    font-weight: bold;
+    color: #666;               /* Tmavě šedá barva */
+    cursor: pointer;           /* Změní kurzor na ručičku při najetí */
+    border: 1px solid #ccc;    /* Jemný rámeček */
+    border-radius: 50%;        /* Udělá ho kulatým */
+    width: 24px;               /* Pevná šířka */
+    height: 24px;              /* Pevná výška */
+    display: inline-flex;      /* Použijeme flex pro centrování textu uvnitř */
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease; /* Plynulý přechod pro hover efekt */
+}
+
+/* Změna barvy při najetí myší */
+.help-icon:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}

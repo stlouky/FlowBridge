@@ -3,58 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowBridge Trainer</title>
+    <title>Trénink - {{ lesson_name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header>
-        <h1>FlowBridge</h1>
+        <h1>FlowBridge Trénink: {{ lesson_name }}</h1>
+        <nav>
+            <a href="{{ url_for('main.manage_lessons') }}" class="btn-nav">Změnit lekci</a>
+        </nav>
     </header>
     
     <main>
         <div id="main-container">
             {% if phrase %}
-                <h2>Tréninková fráze:</h2>
+                <!-- === UPRAVENÝ NADPIS S FLEXBOXEM === -->
+                <h2 class="question-header">
+                    <span>Tréninková fráze:</span>
+                    <span id="question-help-icon" class="help-icon" title="Zobrazit překlad otázky">(?)</span>
+                </h2>
+                <!-- ===================================== -->
+
                 <p id="phrase-question">{{ phrase.Otázka_EN }}</p>
                 
                 <h3>Tvoje odpověď:</h3>
                 <p id="masked-answer" class="masked-text">{{ masked_answer }}</p>
 
-                <!-- Formulář pro odpověď -->
                 <form id="answer-form">
-                    <input 
-                        type="text" 
-                        id="answer-input" 
-                        name="answer" 
-                        placeholder="Napište svou odpověď..." 
-                        required 
-                        autocomplete="off" 
-                        autofocus>
-                    
-                    <!-- Skryté pole pro ID, aby JS věděl, co odesílá -->
+                    <input type="text" id="answer-input" name="answer" placeholder="Napište svou odpověď..." required autocomplete="off" autofocus>
                     <input type="hidden" id="phrase-id-input" value="{{ phrase.ID_páru }}">
-                    
                     <button type="submit" id="submit-button">Ověřit</button>
                 </form>
 
             {% else %}
                 <h2>Gratuluji!</h2>
-                <p>Všechny fráze jsou naučené. Přidej nové do `fraze.csv` a restartuj server.</p>
+                <p>Všechny fráze v lekci "{{ lesson_name }}" jsou naučené.</p>
+                <a href="{{ url_for('main.manage_lessons') }}" class="btn-nav">Vybrat jinou lekci</a>
             {% endif %}
 
-            <!-- Kontejner pro zobrazení zpětné vazby (diff) -->
             <div id="feedback-container"></div>
+        </div>
+
+        <div id="info-panel-wrapper" class="info-panel hidden">
+            <h3 id="info-panel-title">Nápověda</h3>
+            <div id="info-panel-content"></div>
         </div>
     </main>
 
-    <!-- Jeden audio přehrávač pro celou aplikaci -->
     <audio id="audio-player"></audio>
     
     <footer>
+        <div class="settings">
+            <input type="checkbox" id="setting-show-translation">
+            <label for="setting-show-translation">Zobrazovat překlad odpovědi po ověření</label>
+        </div>
         <p>&copy; 2025 - Tvůj projekt FlowBridge</p>
     </footer>
 
-    <!-- Načtení našeho JavaScriptu na konci stránky -->
+    <script id="initial-phrase-data" type="application/json">
+        {{ initial_phrase_data|tojson|safe }}
+    </script>
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

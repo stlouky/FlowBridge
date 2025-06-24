@@ -1,15 +1,20 @@
 from flask import Flask
-from config import Config
+# Předpokládám, že zde máte import pro CORS, pokud jste ho použil
+# from flask_cors import CORS
 
-def create_app(config_class=Config):
-    # Vytvoříme instanci aplikace
+def create_app():
+    """
+    Application Factory - vytváří a konfiguruje Flask aplikaci.
+    """
     app = Flask(__name__)
-    # Načteme konfiguraci ze souboru config.py
-    app.config.from_object(config_class)
 
-    # Zaregistrujeme náš "Blueprint" z modulu 'main'
-    from app.main import bp as main_bp
+    # >>> PŘIDEJTE TENTO ŘÁDEK <<<
+    # Je nezbytný pro fungování sessions (ukládání dat pro uživatele).
+    app.config['SECRET_KEY'] = 'a-very-secret-key-for-development'
+    # CORS(app) # Pokud používáte CORS, nechte ho zde
+
+    # Zde registrujete vaše blueprinty (tento kód už tam máte)
+    from .main.routes import bp as main_bp
     app.register_blueprint(main_bp)
 
-    # Vrátíme vytvořenou a nakonfigurovanou aplikaci
     return app
